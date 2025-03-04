@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+html{
+    font-size: 16px;
+}
+
+#header{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title{
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+    color: seashell;
+}
+
+#playerScore, #computerScore{
+    color: seashell;
+    font-size: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+/*Table */
+
+#middleLine{
+    border: 0.2rem black dashed;
+}
+
+#computerSide, #playerSide{
+    height: 18.9rem;
+    background-color: #008000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* UI */
+
+#UI{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 33%;
+    left: 41%;
+    z-index: 5;
+}
+
+#pass{
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    margin: 2rem;
+    background-color: black;
+    color: seashell;
+    font-size: 2rem;
+}
+
+#deck{
+    transform: rotate(90deg);
+    height: 10rem;
+    width: 7rem;
+}
+
+/*Cards */
+
+#card-muster, #cardback-muster{
+    display: none;
+}
+
+.card{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    width: 7rem;
+    background-color: white;
+    margin: 0.2rem;
+}
+
+.number{
+    font-size: 3rem;
+}
+
+.suit{
+    width: 50%;
+    height: 3rem;
+}
+
+.cardback{
+    position: absolute;
+    height: 10rem;
+    width: 7rem;
+    z-index: 5;
+}
