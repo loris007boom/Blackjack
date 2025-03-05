@@ -1,5 +1,5 @@
 import { Card } from "./Card.js";
-import { startGame, endGame, countPoints } from "./mainGame.js";
+import { startGame, endGame, getCardForEventListener } from "./mainGame.js";
 
 //Arrays of values
 const numberImgs: string[] = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -7,19 +7,24 @@ const numberValues: number[] = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 const suitImgs: string[] = ["images/suits/spades.png", "images/suits/clubs.png", "images/suits/hearts.png", "images/suits/diamonds.png"];
 const suitValues: string[] = ["spades", "clubs", "hearts", "diamonds"];
 
-//Deck and cards arrays
-const deck: Card[] = [];
-const playerCards: number[] = [];
-const computerCards: number[] = [];
+//Deck array
+let deck: Card[] = [];
 
 //Creating the deck
-for (let i = 0; i < suitValues.length; i++)
+function createDeck()
 {
-    for (let j = 0; j < numberValues.length; j++)
+    deck = [];
+
+    for (let i = 0; i < suitValues.length; i++)
     {
-        const card = new Card(numberImgs[j], numberValues[j], suitImgs[i], suitValues[i]);
-        deck.push(card);
+        for (let j = 0; j < numberValues.length; j++)
+        {
+            const card = new Card(numberImgs[j], numberValues[j], suitImgs[i], suitValues[i]);
+            deck.push(card);
+        }
     }
+
+    shuffleArray(deck);
 }
 
 //Shuffling the deck
@@ -30,36 +35,18 @@ function shuffleArray(array: Card[]): void {
     }
 }
 
-shuffleArray(deck);
-
-function drawCard(): Card
+//Adding event listeners
+function addingEventListeners()
 {
-    const card = deck.pop() as Card;
-    return card;
-}
-
-function getCard(side: string): void
-{
-    const tableSide = document.getElementById(side);
-    const card = drawCard();
-    tableSide?.appendChild(card.html);
-    //Choosing which array of cards to push the card into
-    if (side === "playerSide")
-    {
-        playerCards.push(card.numberValue);
-        countPoints(playerCards);
-    }
-    else
-    {
-        computerCards.push(card.numberValue);
-    }
+    document.getElementById("deck")?.addEventListener("click", getCardForEventListener);
+    document.getElementById("pass")?.addEventListener("click", endGame);
 }
 
 //Starting the game
+createDeck();
+
 startGame();
 
-//Adding event listeners
-document.getElementById("deck")?.addEventListener("click", () => {getCard("playerSide")});
-document.getElementById("pass")?.addEventListener("click", endGame);
+addingEventListeners();
 
-export { drawCard, getCard, playerCards, computerCards };
+export { deck, addingEventListeners, createDeck };
